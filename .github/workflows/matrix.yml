@@ -16,6 +16,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install deps
-        uses: npm ci
+        run: npm ci
       - name: Build proj
         run: npm run build
