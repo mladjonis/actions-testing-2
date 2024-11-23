@@ -7,8 +7,14 @@ on:
                 required: false
                 default: dist
                 type: string
+        outputs:
+            result:
+                description: Output reusable deploy
+                value: ${{ jobs.deploy.outputs.outcome }}
 jobs:
     deploy:
+        outputs:
+            outcome: ${{ steps.set-result.outputs.step-result }}
         runs-on: ubuntu-20.04
         steps:
             - name: Get code
@@ -19,3 +25,6 @@ jobs:
               run: ls
             - name: Output info
               run: echo "Simulating deploying"
+            - name: Set result output
+              id: set-result
+              run: echo "step-result=success" >> $GITHUB_OUTPUT

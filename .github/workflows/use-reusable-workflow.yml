@@ -71,6 +71,12 @@ jobs:
     uses: ./.github/workflows/reus.yml
     with:
       artifact-name: dist-files
+  print-deploy-result:
+    needs: deploy
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Echo result
+        run: echo "${{ needs.deploy.outputs.result }}"
   test-failure-job:
     needs: [lint, deploy]
     if: failure()
