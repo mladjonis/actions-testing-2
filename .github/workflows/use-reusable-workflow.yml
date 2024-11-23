@@ -69,6 +69,8 @@ jobs:
   deploy:
     needs: build
     uses: ./.github/workflows/reus.yml
+    with:
+      artifact-name: dist-files
   test-failure-job:
     needs: [lint, deploy]
     if: failure()
